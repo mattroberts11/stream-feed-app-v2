@@ -16,11 +16,26 @@ app.use(express.json());
 
 const serverClient = connect(api_key, api_secret, app_id);
 
+// console.log('SERVER CLIENT', serverClient);
+
+app.get('/client', async (req, res) => {
+  const serverClient = await connect(api_key, api_secret, app_id);
+  // console.log('SERVER CLIENT', serverClient);
+
+  try {
+    res.status(200).json(serverClient);
+  } catch(err){
+    res.status(500).send("Error creating server client for feed", err)
+  }
+})
+
 app.post('/token', async (req, res) => {
   // create token here with userID from the front end req.body
-  console.log('TOKEN REQ.BODY', req.body);
+  // console.log('TOKEN REQ.BODY', req.body);
   
   const { user } = req.body;
+  // const user = 'katy';
+  
 
   const token = serverClient.createUserToken(user);
 
@@ -29,8 +44,6 @@ app.post('/token', async (req, res) => {
   } catch(err) {
     res.status(500).send("Error getting token", err);
   }
-
-  // res.status(200).send('heres your token!');
 })
 
 app.listen(port, () => {
