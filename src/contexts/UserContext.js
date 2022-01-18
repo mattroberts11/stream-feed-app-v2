@@ -2,35 +2,33 @@ import { createContext, useState } from "react";
 
 
 export const UserContext = createContext({
-  userId: '',
-  authenticated: false,
+  name: '',
+  auth: false,
 });
 
+export const UserProvider = ({ children }) => {
+  // User is the name of the "data" that gets stored in context
+  const [user, setUser] = useState({ name: '', auth: true });
 
-
-export const UserProvider = ({children}) => {
-
-  const [userId, setUserId] = useState({userId: '', authenticated: true});
-  
-  const login = (userId) => {
-    setUserId( (userId) => ({
-      userId: userId,
-      authenticated: true,
-    }))
+  // Login updates the user data with a name parameter
+  const login = (name) => {
+    setUser((user) => ({
+      name: name,
+      auth: true,
+    }));
   };
 
+  // Logout updates the user data to default
   const logout = () => {
-    setUserId((userId) => ({
-      userId: '',
-      authenticated: false,
-    }))
-  }
-console.log('USERCONTEXT USERID', userId)
+    setUser((user) => ({
+      name: '',
+      auth: false,
+    }));
+  };
+
   return (
-    <UserContext.Provider value={{userId, login, logout }}>
+    <UserContext.Provider value={{ user, login, logout }}>
       {children}
     </UserContext.Provider>
-  )
-
-
+  );
 }
