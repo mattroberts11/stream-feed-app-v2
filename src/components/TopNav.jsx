@@ -15,6 +15,7 @@ const TopNav = () => {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
+              component={Link} to={'/'}
         >
           <MenuIcon />
         </IconButton>

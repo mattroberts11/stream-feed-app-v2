@@ -1,9 +1,9 @@
-import { Box, Button, Container, Paper, TextField } from "@mui/material";
-import { useContext, useState } from "react";
+import { Box, Button, TextField } from "@mui/material";
+import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
 
-
+import PageContainer from "../components/PageContainer";
 
 const Login = () => {
   
@@ -26,17 +26,13 @@ const Login = () => {
   }
 
   return (
-    <Container>
-      <Box sx={{padding: '20px'}}>
-        <Paper sx={{p: 2, marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}} elevation={6} >
-          <h2>Login to your Feed</h2>
-          <UserNameInput />
-          <Box sx={{p: 2}}>
-            <Button variant="contained">Login</Button>
-          </Box>
-        </Paper>
+    <PageContainer>
+      <h2>Login to your Feed</h2>
+      <UserNameInput />
+      <Box sx={{p: 2}}>
+        <Button variant="contained">Login</Button>
       </Box>
-    </Container>
+    </PageContainer>
   )
 }
 
